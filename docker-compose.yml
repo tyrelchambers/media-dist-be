@@ -2,6 +2,7 @@ version: "3.8"
 services:
   server:
     build: .
+    container_name: server
     ports:
       - "4000:4000"
     env_file:
@@ -12,7 +13,6 @@ services:
     command: npm start
     depends_on:
       - db
-
   db:
     container_name: media_db
     image: "postgres"
@@ -23,7 +23,8 @@ services:
     volumes:
       - media_data:/var/lib/postgresql/data/
     restart: unless-stopped
-
 networks:
   default:
     name: media-network
+volumes:
+  media_data:
