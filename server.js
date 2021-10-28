@@ -3,10 +3,13 @@ const cors = require("cors");
 const express = require("express");
 const port = process.env.PORT || "4000";
 const app = express();
+const auth = require("./api/auth");
 
 app.use(cors());
 
 app.use(express.json());
+
+app.use("/api/auth", auth);
 
 app.use(function (err, req, res, next) {
   console.error(err.message);
