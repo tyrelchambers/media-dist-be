@@ -2,7 +2,7 @@ const express = require('express');
 const {authHandler} = require('../middleware/authHandler')
 const app = express.Router()
 
-app.post('/v1/create', authHandler, async (req, res, next) => {
+app.post('/v1/create/youtube', authHandler, async (req, res, next) => {
   try {
     
   } catch (error) {
@@ -11,3 +11,9 @@ app.post('/v1/create', authHandler, async (req, res, next) => {
 })
 
 module.exports = app
+
+// type: youtube
+// title:
+// description
+// tags
+// visibility: default unlisted
