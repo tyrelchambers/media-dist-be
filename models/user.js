@@ -20,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         unique: true,
       },
+      youtubeAccessToken: DataTypes.STRING,
+      youtubeRefreshToken: DataTypes.STRING,
       email: {
         type: DataTypes.STRING,
         allowNull: false,
