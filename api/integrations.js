@@ -3,7 +3,7 @@ const { google } = require('googleapis');
 const authHandler = require('../middleware/authHandler');
 const db = require('../models/index')
 const app =express.Router()
-
+const queryString = require('query-string')
 
 
 const scopes = [
@@ -79,4 +79,22 @@ app.put('/v1/youtube/disconnect', authHandler, async(req, res, next) => {
     next(error)
   }
 })
+
+app.get('/v1/facebook/login', authHandler, async (req, res, next) => {
+  try {
+    const stringifiedParams = queryString.stringify({
+      client_id: process.env.APP_ID_GOES_HERE,
+      redirect_uri: 'https://www.example.com/authenticate/facebook/',
+      scope: ['email', 'user_friends'].join(','), // comma seperated string
+      response_type: 'code',
+      auth_type: 'rerequest',
+      display: 'popup',
+    });
+    const facebookLoginUrl = `https://www.facebook.com/v4.0/dialog/oauth?${stringifiedParams}`;
+
+  } catch (error) {
+    next(error)
+  }
+})
+
 module.exports = app
