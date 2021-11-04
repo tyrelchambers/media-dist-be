@@ -83,14 +83,15 @@ app.put('/v1/youtube/disconnect', authHandler, async(req, res, next) => {
 app.get('/v1/facebook/login', authHandler, async (req, res, next) => {
   try {
     const stringifiedParams = queryString.stringify({
-      client_id: process.env.APP_ID_GOES_HERE,
-      redirect_uri: 'https://www.example.com/authenticate/facebook/',
-      scope: ['email', 'user_friends'].join(','), // comma seperated string
+      client_id: process.env.IG_ID,
+      redirect_uri: 'http://localhost:3000/callback/facebook',
+      scope: ['email', 'instagram_basic', 'pages_show_list'].join(','), // comma seperated string
       response_type: 'code',
       auth_type: 'rerequest',
       display: 'popup',
     });
-    const facebookLoginUrl = `https://www.facebook.com/v4.0/dialog/oauth?${stringifiedParams}`;
+    const facebookLoginUrl = `https://www.facebook.com/v12.0/dialog/oauth?${stringifiedParams}`;
+    res.send(facebookLoginUrl)
 
   } catch (error) {
     next(error)
